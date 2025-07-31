@@ -13,8 +13,8 @@ services:
     container_name: docusaurus
     restart: unless-stopped
     environment:
-      TARGET_UID: 1000
-      TARGET_GID: 1000
+      TARGET_UID: 1001
+      TARGET_GID: 1001
       AUTO_UPDATE: 'true'
       WEBSITE_NAME: 'MyWebsite'
       TEMPLATE: 'classic'
