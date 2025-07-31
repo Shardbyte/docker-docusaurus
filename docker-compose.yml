@@ -1,0 +1,32 @@
+#################################################
+# Copyright (c) Shardbyte. All Rights Reserved. #
+# SPDX-License-Identifier: MIT                  #
+#################################################
+# Shardbyte Docker Compose | docker-compose.yml
+#
+#
+#
+services:
+#######################################################
+  docusaurus:
+    image: 'shardbyte/docusaurus:latest'
+    container_name: docusaurus
+    restart: unless-stopped
+    environment:
+      TARGET_UID: 1000
+      TARGET_GID: 1000
+      AUTO_UPDATE: 'true'
+      WEBSITE_NAME: 'MyWebsite'
+      TEMPLATE: 'classic'
+      RUN_MODE: 'development'
+    volumes:
+      - './docusaurus-data:/docusaurus'
+    networks:
+      - docusaurus_network
+    ports:
+      - "3000:80"
+#######################################################
+networks:
+  docusaurus_network:
+    name: docusaurus_network
+#######################################################
