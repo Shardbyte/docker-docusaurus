@@ -18,13 +18,14 @@ RUN apk add --no-cache \
     supervisor \
     && rm -rf /var/cache/apk/*
 
-RUN addgroup -g 1001 docusaurus && \
-    adduser -D -u 1001 -G docusaurus docusaurus && \
+RUN deluser --remove-home node && \
+    addgroup -g 1000 docusaurus && \
+    adduser -D -u 1000 -G docusaurus docusaurus && \
     mkdir -p /home/docusaurus/cron && \
     chown -R docusaurus:docusaurus /home/docusaurus
 
-ENV TARGET_UID=1001 \
-    TARGET_GID=1001 \
+ENV TARGET_UID=1000 \
+    TARGET_GID=1000 \
     AUTO_UPDATE=true \
     WEBSITE_NAME=MyWebsite \
     TEMPLATE=classic \
