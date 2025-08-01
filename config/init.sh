@@ -42,4 +42,4 @@ if [[ "$RUN_MODE" != "development" && "$RUN_MODE" != "production" ]]; then
 fi
 
 echo "Start supervisord to start Docusaurus..."
-exec supervisord -c /etc/supervisor/conf.d/supervisord.conf
+exec /run.sh

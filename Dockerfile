@@ -14,7 +14,6 @@ LABEL   author="Shardbyte" maintainer="containers@shardbyte.com" \
 RUN apk add --no-cache \
     bash \
     curl \
-    supervisor \
     && rm -rf /var/cache/apk/*
 
 ENV AUTO_UPDATE=true \
@@ -28,7 +27,6 @@ WORKDIR /docusaurus
 
 COPY config/init.sh /
 COPY config/run.sh /
-COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 RUN chmod +x /init.sh /run.sh
 
