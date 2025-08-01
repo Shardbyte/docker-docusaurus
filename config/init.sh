@@ -16,7 +16,7 @@ fi
 
 if [[ ! -d "$DOCU_PATH"/"$WEBSITE_NAME" ]]; then
     echo "Install docusaurus..."
-    if ! npx @docusaurus/init@latest init -y "$WEBSITE_NAME" "$TEMPLATE"; then
+    if ! npx --yes @docusaurus/init@latest init "$WEBSITE_NAME" "$TEMPLATE"; then
         echo "Failed to initialize Docusaurus."
         exit 1
     fi
