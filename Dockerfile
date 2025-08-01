@@ -30,7 +30,7 @@ COPY config/init.sh /
 COPY config/run.sh /
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-RUN chmod +x /init.sh /auto_update_job.sh /run.sh
+RUN chmod +x /init.sh /run.sh
 
 HEALTHCHECK --interval=30s --timeout=3s --start-period=30s --retries=3 \
     CMD curl -f http://localhost:80 || exit 1
