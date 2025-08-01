@@ -1,20 +1,7 @@
 #!/usr/bin/env bash
 
-
-
-find_autoupdate_cron_jobs() {
-    local auto_update_jobs=0
-
-    while read -r line; do
-        [[ $line == *"auto_update_job"* ]] && (( auto_update_jobs++ ))
-    done
-
-    echo $auto_update_jobs
-}
-
 DOCU_PATH="/docusaurus"
 WEB_SRC_PATH="$DOCU_PATH"/website
-AUTO_UPD_CRONTAB_PATH="/auto_update_crontab.txt"
 
 echo -e "Variables:
 \\t- AUTO_UPDATE=${AUTO_UPDATE}
@@ -27,19 +14,9 @@ if [[ -z "$WEBSITE_NAME" ]]; then
     exit 1
 fi
 
-if [[ "$AUTO_UPDATE" == true ]]; then
-    echo "Register a new cron job for auto updating..."
-    cat "$AUTO_UPD_CRONTAB_PATH" >> /etc/crontabs/root
-    if [[ $(find_autoupdate_cron_jobs < <(crontab -l)) -gt 0 ]]; then
-        echo "Successfully registered."
-    else
-        echo "Register failed with unknown problem. Please issue this on my Github repository."
-    fi
-fi
-
 if [[ ! -d "$DOCU_PATH"/"$WEBSITE_NAME" ]]; then
     echo "Install docusaurus..."
-    if ! npx @docusaurus/init@latest init "$WEBSITE_NAME" "$TEMPLATE"; then
+    if ! npx @docusaurus/init@latest init -y "$WEBSITE_NAME" "$TEMPLATE"; then
         echo "Failed to initialize Docusaurus."
         exit 1
     fi

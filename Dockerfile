@@ -14,7 +14,6 @@ LABEL   author="Shardbyte" maintainer="containers@shardbyte.com" \
 RUN apk add --no-cache \
     bash \
     curl \
-    dcron \
     supervisor \
     && rm -rf /var/cache/apk/*
 
@@ -28,9 +27,7 @@ RUN mkdir /docusaurus
 WORKDIR /docusaurus
 
 COPY config/init.sh /
-COPY config/auto_update_job.sh /
 COPY config/run.sh /
-COPY config/auto_update_crontab.txt /
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 RUN chmod +x /init.sh /auto_update_job.sh /run.sh
